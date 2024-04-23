@@ -327,12 +327,6 @@ paths:
                   type: string
                 domain_status:
                   type: string
-                track_pageviews:
-                  type: boolean
-                track_first_visit:
-                  type: boolean
-                track_websessions:
-                  type: boolean
       responses:
         '200':
           description: Successful operation
@@ -660,15 +654,6 @@ components:
           type: string
           format: date-time
           example: "2021-01-01T00:00:00Z"
-        track_first_visit:
-          type: boolean
-          example: true
-        track_websessions:
-          type: boolean
-          example: true
-        track_pageviews:
-          type: boolean
-          example: true
     DomainsList:
       type: object
       properties:
@@ -715,15 +700,6 @@ components:
           type: string
           format: date-time
           example: "2021-01-01T00:00:00Z"
-        track_pageviews:
-          type: boolean
-          example: true
-        track_first_visit:
-          type: boolean
-          example: true
-        track_websessions:
-          type: boolean
-          example: true
     ErrorResponse:
       type: object
       properties:
