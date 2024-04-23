@@ -266,7 +266,6 @@ paths:
         - Accounts
       description: Get the events of the account created
       parameters:
-        - $ref: '#/components/parameters/agencyIdParam'
         - $ref: '#/components/parameters/accountIdParam'
         - $ref: '#/components/parameters/startDateParam'
         - $ref: '#/components/parameters/endDateParam'
@@ -292,7 +291,6 @@ paths:
         - Accounts
       description: Get the domains of the account created
       parameters:
-        - $ref: '#/components/parameters/agencyIdParam'
         - $ref: '#/components/parameters/accountIdParam'
         - $ref: '#/components/parameters/pageParam'
         - $ref: '#/components/parameters/perPageParam'
@@ -317,7 +315,6 @@ paths:
         - Accounts
       description: Add the domains of the account created
       parameters:
-        - $ref: '#/components/parameters/agencyIdParam'
         - $ref: '#/components/parameters/accountIdParam'
       requestBody:
         required: true
@@ -357,7 +354,6 @@ paths:
         - Accounts
       description: Delete the domains of the account created
       parameters:
-        - $ref: '#/components/parameters/agencyIdParam'
         - $ref: '#/components/parameters/accountIdParam'
       responses:
         '200':
@@ -386,7 +382,6 @@ paths:
         - Accounts
       description: Get the pixel code of the account created
       parameters:
-        - $ref: '#/components/parameters/agencyIdParam'
         - $ref: '#/components/parameters/accountIdParam'
       responses:
         '200':
