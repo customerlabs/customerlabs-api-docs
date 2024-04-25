@@ -325,8 +325,10 @@ paths:
               properties:
                 domain_name:
                   type: string
+                  example: "www.customerlabs.com"
                 domain_status:
                   type: string
+                  example: "Active"
       responses:
         '200':
           description: Successful operation
@@ -357,10 +359,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  status:
-                    type: string
+                  success:
+                    type: boolean
                   message:
                     type: string
+                    example: "Domain deleted successfully"
         '400':
           description: Invalid input
           content:
@@ -369,12 +372,12 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
-  /accounts/{account_id}/pixel_code:
+  /accounts/{account_id}/pixel_script:
     get:
-      summary: Get Account Pixel Code API
+      summary: Get Account Pixel Script API
       tags:
         - Accounts
-      description: Get the pixel code of the account created
+      description: Get the pixel script of the account created
       parameters:
         - $ref: '#/components/parameters/accountIdParam'
       responses:
@@ -383,7 +386,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PixelCodeResponse'
+                $ref: '#/components/schemas/PixelScriptResponse'
         '400':
           description: Invalid input
           content:
@@ -432,10 +435,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  status:
-                    type: string
+                  success:
+                    type: boolean
                   message:
                     type: string
+                    example: "API key deleted successfully"
         '400':
           description: Invalid input
           content:
@@ -534,7 +538,7 @@ components:
           example: []
         result:
             $ref: '#/components/schemas/AccountResponse'
-    PixelCodeResponse:
+    PixelScriptResponse:
       type: object
       properties:
         success:
@@ -550,7 +554,7 @@ components:
           properties:
             pixel_code:
               type: string
-              example: "<script>...</script>"
+              example: "<!-- CustomerLabs Tag --><script>!function(t,e,r,c,a,n,s){t.ClAnalyticsObject=a,t[a]=t[a]||[],t[a].methods=['trackSubmit','trackClick','pageview','identify','track', 'trackConsent'],t[a].factory=function(e){return function(){var r=Array.prototype.slice.call(arguments);return r.unshift(e),t[a].push(r),t[a]}};for(var i=0;i<t[a].methods.length;i++){var o=t[a].methods[i];t[a][o]=t[a].factory(o)};n=e.createElement(r),s=e.getElementsByTagName(r)[0],n.async=1,n.crossOrigin='anonymous',n.src=c,s.parentNode.insertBefore(n,s)}(window,document,'script','https://cdn.js.customerlabs.co/cl405fmejqdqx.js','_cl');_cl.SNIPPET_VERSION='2.0.0'</script><!-- End of CustomerLabs Tag -->"
     AccountsList:
       type: object
       properties:
@@ -647,6 +651,7 @@ components:
       properties:
         domain_name: 
           type: string
+          example: "www.customerlabs.com"
         domain_status:
           type: string
           example: "Active"
@@ -689,6 +694,7 @@ components:
       properties:
         domain_name: 
           type: string
+          example: "www.customerlabs.com"
         domain_status:
           type: string
           example: "Active"
