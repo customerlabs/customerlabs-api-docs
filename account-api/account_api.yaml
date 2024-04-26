@@ -258,7 +258,83 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
-
+  /agency/{agency_id}/accounts/{account_id}/api_key:
+    get:
+      summary: Get Account API Key API
+      tags:
+        - Agency
+      description: Get the API key of the account created
+      parameters:
+        - $ref: '#/components/parameters/agencyIdParam'
+        - $ref: '#/components/parameters/accountIdParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyAuth'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Delete Account API Key API
+      tags:
+        - Agency
+      description: Delete the API key of the account created
+      parameters:
+        - $ref: '#/components/parameters/agencyIdParam'
+        - $ref: '#/components/parameters/accountIdParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "API key deleted successfully"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+    put:
+      summary: Regenerate Account API Key API
+      tags:
+        - Agency
+      description: Regenerate the API key of the account created
+      parameters:
+        - $ref: '#/components/parameters/accountIdParam'
+        - $ref: '#/components/parameters/agencyIdParam'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyAuth'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+  
   /accounts/{account_id}/events:
     get:
       summary: Get Account Events API
@@ -395,37 +471,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
-  /agency/{agency_id}/accounts/{account_id}/api_key:
+  /accounts/{account_id}/integrations:
     get:
-      summary: Get Account API Key API
+      summary: Get Account Integrations API
       tags:
-        - Agency
-      description: Get the API key of the account created
+        - Accounts
+      description: Get the integrations of the account created
       parameters:
-        - $ref: '#/components/parameters/agencyIdParam'
-        - $ref: '#/components/parameters/accountIdParam'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiKeyAuth'
-        '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-    delete:
-      summary: Delete Account API Key API
-      tags:
-        - Agency
-      description: Delete the API key of the account created
-      parameters:
-        - $ref: '#/components/parameters/agencyIdParam'
         - $ref: '#/components/parameters/accountIdParam'
       responses:
         '200':
@@ -437,9 +489,17 @@ paths:
                 properties:
                   success:
                     type: boolean
-                  message:
-                    type: string
-                    example: "API key deleted successfully"
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        integration_name:
+                          type: string
+                          example: "Google Analytics"
+                        iik:
+                          type: string
+                          example: "1234567890"
         '400':
           description: Invalid input
           content:
@@ -448,21 +508,56 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
-    put:
-      summary: Regenerate Account API Key API
+    post:
+      summary: Add Account Integrations API
       tags:
-        - Agency
-      description: Regenerate the API key of the account created
+        - Accounts
+      description: Add the integrations of the account created
       parameters:
         - $ref: '#/components/parameters/accountIdParam'
-        - $ref: '#/components/parameters/agencyIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                integration_name:
+                  type: string
+                  example: "Google Analytics"
+                iik:
+                  type: string
+                  example: "1234567890"
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiKeyAuth'
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  errors:
+                    type: array
+                    example: []
+                  messages:
+                    type: array
+                    example: [
+                      {
+                        "type": "success",
+                        "message": "Integration added successfully"
+                      }
+                    ]
+                  result:
+                    type: object
+                    properties:
+                      integration_name:
+                        type: string
+                        example: "Google Analytics"
+                      iik:
+                        type: string
+                        example: "1234567890"
         '400':
           description: Invalid input
           content:
@@ -471,7 +566,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
-
 security:
   - ApiKeyAuth: []
 
