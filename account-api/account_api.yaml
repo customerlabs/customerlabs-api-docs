@@ -78,7 +78,7 @@ paths:
                     example: "CustomerLabs"
                   website:
                     type: string
-                    example: "www.customerlabs.com"
+                    example: "https://www.customerlabs.com"
                   email:
                     type: string
                     example: "developers@customerlabs.co"
