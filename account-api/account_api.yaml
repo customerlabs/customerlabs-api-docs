@@ -566,25 +566,18 @@ components:
     AccountResponse:
       type: object
       properties:
-        agency_id: 
+        name:
           type: string
-        agency_name:
+        account_id:
           type: string
-        account_details:
-          type: object
-          properties:
-            name:
-              type: string
-            account_id:
-              type: string
-            events_count:
-              type: integer
-            segments_count:
-              type: integer
-            destination_count:
-              type: integer
-            source_count:
-              type: integer
+        events_count:
+          type: integer
+        segments_count:
+          type: integer
+        destination_count:
+          type: integer
+        source_count:
+          type: integer
     AccountDeletionResponse:
       type: object
       properties:
